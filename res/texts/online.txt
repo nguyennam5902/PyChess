@@ -1,0 +1,15 @@
+Previously, this menu page gave users the option
+to connect to an external server I used to host
+for testing purposes.
+
+This server is not being hosted anymore and the
+project is not being maintained actively as of
+June 2022.
+
+
+
+THE SECTION BELOW IS FOR SELF-HOSTED SERVERS
+
+Enter the server's address below and connect to it -
+
+
