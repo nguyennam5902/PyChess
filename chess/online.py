@@ -34,12 +34,11 @@ def main(win, username, password, load, ipv6=False):
     write(sock, username)
     write(sock, password)
      # Đợi server phản hồi "OK" để xác nhận username và password hợp lệ
-    while read() != "OK":
-        username = "hoan"
-        password = "1234"
-        write(sock, username)
-        write(sock, password)
-    
+    if read() != "OK":
+        showLoading(win, 7)
+        return 1
+    # print(username)
+    # print(password)
     #TODO: check username, password
     write(sock, "PyChess")
     write(sock, VERSION)

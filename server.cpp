@@ -233,7 +233,7 @@ std::string read(int sock, int timeout = -1)
     {
         return "quit";
     }
-    std::cout <<sock<<": "<<buffer << std::endl;
+    std::cout << sock << ": " << buffer << std::endl;
     return std::string(buffer);
 }
 
@@ -306,12 +306,10 @@ bool game(int sock1, int sock2)
         }
         else if (msg.compare("draw") == 0 || msg.compare("resign") == 0 || msg.compare("end") == 0 || msg.compare("lose") == 0 || msg.compare("win") == 0)
         {
-            if (msg.compare("resign") == 0 )
-                score(sock2, sock1); 
-            else if (msg.compare("lose") == 0 )
+            if (msg.compare("resign") == 0)
+                score(sock2, sock1);
+            else if (msg.compare("lose") == 0)
                 score(sock1, sock2);
-            
-
             // if (msg.compare("win") == 0)
             //     score(sock2, sock1);
             return false;
@@ -669,12 +667,11 @@ void initPlayerThread(int sock)
         log("Error reading password from client.");
         return;
     }
-    // while (!checkusername(username, password))
-    // {
-    //     write(sock, "notOK");
-    //     username = read(sock, 3);
-    //     password = read(sock, 3);
-    // }
+    if (!checkusername(username, password))
+    {
+        write(sock, "notOK");
+        return;
+    }
 
     write(sock, "OK");
 

@@ -236,6 +236,7 @@ class ONLINE:
         vsmall.render("[ERR 4] The server is locked...", True, WHITE),
         vsmall.render("[ERR 5] Unknown error occured...", True, WHITE),
         vsmall.render("You got disconnected from server..", True, WHITE),
+        vsmall.render("Login failed", True, WHITE),
     )
     GOBACK = vsmall.render("Go Back", True, WHITE)
         

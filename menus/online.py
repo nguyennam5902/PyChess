@@ -45,7 +45,7 @@ def main(win):
     sel = 0
     
     username_box = TextBox(FONT, (0, 0, 0), (65, 350, 200, 35))
-    password_box = TextBox(FONT, (0, 0, 0), (65, 400, 200, 35))  # Adjusted position for password box
+    password_box = TextBox(FONT, (0, 0, 0), (65, 400, 200, 35))
     
     while True:
         clock.tick(24)
