@@ -1,15 +1,5 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we manage the chess gameplay for singleplayer section of this
-application. This interfaces with a chess engine implemented in pure python.
-For the Python Chess Engine, see file at chess.lib.ai
-
-For a better understanding of the variables used here, checkout docs.txt
-'''
-
 from chess.lib import *
 
-# Run main code for chess singleplayer
 def main(win, player, load, movestr=""):
     start(win, load)
 
@@ -24,7 +14,7 @@ def main(win, player, load, movestr=""):
         for event in pygame.event.get():
             if event.type == pygame.QUIT and prompt(win):
                 return 0
-            
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 if 460 < x < 500 and 0 < y < 50 and prompt(win):
@@ -42,12 +32,12 @@ def main(win, player, load, movestr=""):
                     sel = [x, y]
 
                     if (side == player
-                        and isValidMove(side, board, flags, prevsel, sel)):
+                            and isValidMove(side, board, flags, prevsel, sel)):
                         promote = getPromote(win, side, board, prevsel, sel)
                         animate(win, side, board, prevsel, sel, load, player)
 
                         side, board, flags = makeMove(
-                            side, board, prevsel, sel, flags, promote)
+                            side, board, prevsel, sel, flags, promote) # type: ignore
                         moves.append(encode(prevsel, sel, promote))
 
                 elif side == player or end:
@@ -56,14 +46,15 @@ def main(win, player, load, movestr=""):
                         if prompt(win, saveGame(moves, "mysingle", player)):
                             return 1
                     elif 0 < x < 80 and 0 < y < 50 and load["allow_undo"]:
-                        moves = undo(moves, 2) if side == player else undo(moves)
+                        moves = undo(
+                            moves, 2) if side == player else undo(moves)
                         side, board, flags = convertMoves(moves)
 
         showScreen(win, side, board, flags, sel, load, player)
-        
+
         end = isEnd(side, board, flags)
         if side != player and not end:
-            fro, to = miniMax(side, board, flags)
+            fro, to = miniMax(side, board, flags) # type: ignore
             animate(win, side, board, fro, to, load, player)
 
             promote = getPromote(win, side, board, fro, to, True)

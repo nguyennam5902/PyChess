@@ -1,15 +1,8 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we manage the online menu which is called when user clicks
-online button on main menu.
-'''
-
 import pygame
 from ext.pyBox import TextBox
 from tools.loader import ONLINEMENU, BACK, FONT, LOGINBOARD
 from tools.utils import rounded_rect
 
-# This shows the screen
 def showScreen(win, sel):
     win.fill((0, 0, 0))
     
@@ -39,7 +32,7 @@ def loginScreen(win, sel):
     
     rounded_rect(win, (255, 255, 255), (300, 350, 110, 30), 10, 3)
     win.blit(LOGINBOARD.CONNECT, (300, 350))
-# This is the main function, called from main menu
+
 def main(win):
     clock = pygame.time.Clock()
     sel = 0

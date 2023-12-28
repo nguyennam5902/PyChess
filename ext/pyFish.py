@@ -1,10 +1,3 @@
-"""
-This file is a part of My-PyChess application.
-
-Here I have written a python interface class for stockfish chess engine.
-This is used in the singleplayer mode of My-PyChess.
-"""
-
 import queue
 import subprocess
 import threading
@@ -22,6 +15,8 @@ _LEVELDATA = (
 )
 
 # StockFish class to interface with stockfish chess engine.
+
+
 class StockFish:
     def __init__(self, path="stockfish", level=1):
         self.moves = []
@@ -106,7 +101,7 @@ class StockFish:
         self._raiseErrorIfInactive()
         if not self.hasMoved() and not block:
             self._put("stop")
-        
+
         enginemove = self.q.get()
         self.moves.append(enginemove)
         return enginemove
@@ -129,6 +124,8 @@ class StockFish:
 
 # A simple function to test wether a stockfish executable works or not.
 # Path to stockfish must be specified as an argument
+
+
 def teststockfish(path):
     fish = StockFish(path)
     stat = fish.isActive()

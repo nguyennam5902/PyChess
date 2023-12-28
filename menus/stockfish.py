@@ -1,9 +1,3 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we manage the stockfish menu.
-
-This is called from either main menu or singleplayer menu
-'''
 import os
 import platform
 
@@ -12,7 +6,6 @@ from ext.pyFish import teststockfish
 from tools.loader import STOCKFISH, BACK, putLargeNum
 from tools.utils import rounded_rect
 
-# This shows a popup on screen wether stockfish is configured or not.
 def install(win, pth):
     pygame.draw.rect(win, (0, 0, 0), (100, 200, 300, 100))
     pygame.draw.rect(win, (255, 255, 255), (100, 200, 300, 100), 4)
@@ -47,7 +40,6 @@ def install(win, pth):
                     else:
                         return 2
 
-# This shows a prompt if user decides to quit before configuring stockfish
 def prompt(win):
     pygame.draw.rect(win, (0, 0, 0), (110, 160, 280, 130))
     pygame.draw.rect(win, (255, 255, 255), (110, 160, 280, 130), 4)
@@ -70,7 +62,6 @@ def prompt(win):
                     elif 300 < event.pos[0] < 345:
                         return False
 
-# This shows the installation guide screen
 def guideScreen(win, OS, pg):
     win.fill((0, 0, 0))
     pygame.draw.rect(win, (255, 255, 255), (10, 10, 480, 480), 4)
@@ -119,7 +110,6 @@ def guideScreen(win, OS, pg):
         for cnt, i in enumerate(STOCKFISH.OTH_TEXT):
             win.blit(i, (20, 50 + cnt*18))
 
-# This a function for managing the stockfish install guide
 def guideMain(win):
     OS = platform.system()
     pg = True
@@ -140,7 +130,7 @@ def guideMain(win):
                         pg = True
 
                 if OS == "Linux" and 210 < x < 290 and 380 < y < 400 and pg:
-                        pg = False
+                    pg = False
 
                 if 180 < x < 270 and 450 < y < 480:
                     if (OS == "Linux" and pg) or OS == "Darwin":
@@ -151,7 +141,6 @@ def guideMain(win):
                     return install(win, pth)
         pygame.display.update()
 
-# This shows the screen
 def showScreen(win, configured):
     win.fill((0, 0, 0))
 
@@ -172,7 +161,6 @@ def showScreen(win, configured):
         for cnt, i in enumerate(STOCKFISH.NONCONFIGURED):
             win.blit(i, (15, 360 + cnt*18))
 
-# This is the main function, called by main menu
 def main(win):
     pth = os.path.join("res", "stockfish", "path.txt")
     configured = os.path.exists(pth)

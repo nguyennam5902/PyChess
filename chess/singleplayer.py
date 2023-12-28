@@ -1,18 +1,7 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we manage the chess gameplay for singleplayer section of this
-application. This interfaces with the popular stockfish engine with the
-help of pyFish module.
-
-Interface code at ext.pyFish
-
-For a better understanding of the variables used here, checkout docs.txt
-'''
-
 from chess.lib import *
 from ext.pyFish import StockFish
 
-# Run main code for chess singleplayer (stockfish)
+
 def main(win, player, level, load, movestr=""):
     fish = StockFish(getSFpath(), level)
 
@@ -38,7 +27,7 @@ def main(win, player, level, load, movestr=""):
             if event.type == pygame.QUIT and prompt(win):
                 fish.close()
                 return 0
-            
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 if 460 < x < 500 and 0 < y < 50 and prompt(win):
@@ -57,7 +46,7 @@ def main(win, player, level, load, movestr=""):
                     sel = [x, y]
 
                     if (side == player
-                        and isValidMove(side, board, flags, prevsel, sel)):
+                            and isValidMove(side, board, flags, prevsel, sel)):
                         promote = getPromote(win, side, board, prevsel, sel)
                         animate(win, side, board, prevsel, sel, load, player)
 
@@ -80,7 +69,7 @@ def main(win, player, level, load, movestr=""):
                         side, board, flags = convertMoves(fish.moves)
 
         end = isEnd(side, board, flags)
-        
+
         showScreen(win, side, board, flags, sel, load, player)
         if side != player and not end and fish.hasMoved():
             fro, to, promote = decode(fish.getMove())

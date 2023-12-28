@@ -20,15 +20,14 @@ from chess.onlinelib.utils import (
     showLobby,
 )
 
-# This handles the online lobby. To display the window, it calls showLobby()
-# and does event handling, socket handling and other important stuff.
+
 def lobby(win, sock, key, load):
     clock = pygame.time.Clock()
     playerList = getPlayers(sock)
     while True:
         clock.tick(10)
         if playerList is None:
-            return 2        
+            return 2
         showLobby(win, key, playerList)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,21 +47,21 @@ def lobby(win, sock, key, load):
                     for i in range(len(playerList)):
                         if 122 + 30 * i < y < 148 + 30 * i:
                             write(sock, "rg" + playerList[i][:4])
-                            
+
                             msg = read()
                             if msg == "close":
                                 return 2
-                            
+
                             elif msg == "msgOk":
                                 ret = request(win, sock)
                                 if ret in [0, 1, 2]:
                                     return ret
-                                
+
                                 elif ret == 4:
                                     newret = chess(win, sock, 0, load)
                                     if newret in [0, 1, 2]:
                                         return newret
-                            
+
                             elif msg.startswith("err"):
                                 showUpdateList(win)
 
@@ -71,7 +70,7 @@ def lobby(win, sock, key, load):
 
         if readable():
             msg = read()
-            print(f"1_{msg}") # Tai sao lai chay toi day
+            print(f"1_{msg}")  # Tai sao lai chay toi day
             if msg == "close":
                 return 2
 
@@ -82,7 +81,7 @@ def lobby(win, sock, key, load):
                     newret = chess(win, sock, 1, load)
                     if newret in [0, 1, 2]:
                         return newret
-                    
+
                 else:
                     write(sock, "gmNo" + msg[2:])
                     if ret == 2:
@@ -90,6 +89,8 @@ def lobby(win, sock, key, load):
                 playerList = getPlayers(sock)
 
 # This is called when user enters chess match, handles online chess.
+
+
 def chess(win, sock, player, load):
     start(win, load)
 
@@ -109,7 +110,7 @@ def chess(win, sock, player, load):
                 if 460 < x < 500 and 0 < y < 50:
                     write(sock, "end")
                     return 3
-                    
+
                 if 50 < x < 450 and 50 < y < 450:
                     x, y = x // 50, y // 50
                     if load["flip"] and player:
@@ -122,10 +123,10 @@ def chess(win, sock, player, load):
                     sel = [x, y]
 
                     if (side == player
-                        and isValidMove(side, board, flags, prevsel, sel)):
+                            and isValidMove(side, board, flags, prevsel, sel)):
                         promote = getPromote(win, player, board, prevsel, sel)
                         write(sock, "mov" + encode(prevsel, sel, promote))
-                        
+
                         animate(win, player, board, prevsel, sel, load, player)
                         side, board, flags = makeMove(
                             side, board, prevsel, sel, flags, promote)
@@ -143,7 +144,6 @@ def chess(win, sock, player, load):
                     if 400 < x < 500 and 450 < y < 500:
                         write(sock, "resign")
                         return 3
-            
 
         showScreen(win, side, board, flags, sel, load, player, True)
         if readable():
@@ -152,7 +152,7 @@ def chess(win, sock, player, load):
                 return 2
             elif msg == "quit" or msg == "resign":
                 return popup(win, sock, msg)
-            
+
             elif msg == "end":
                 msg = "end" if isEnd(side, board, flags) else "abandon"
                 return popup(win, sock, msg)
@@ -160,11 +160,11 @@ def chess(win, sock, player, load):
             elif msg == "draw?":
                 ret = draw(win, sock, False)
                 if ret in [2, 3]:
-                    return 
+                    return
             elif msg == "win":
                 ret = draw_win(win, sock, False)
                 if ret in [2, 3]:
-                    return 
+                    return
             elif msg.startswith("mov") and side != player:
                 fro, to, promote = decode(msg[3:])
                 if isValidMove(side, board, flags, fro, to):
