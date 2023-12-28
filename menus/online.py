@@ -54,7 +54,7 @@ def main(win):
         pygame.draw.rect(win, (255, 255, 255), (63, 348, 204, 39))
         username_box.draw(win)
         
-        pygame.draw.rect(win, (255, 255, 255), (63, 398, 204, 39))  # Draw rectangle for password box
+        pygame.draw.rect(win, (255, 255, 255), (63, 398, 204, 39))
         password_box.draw(win)
             
         for event in pygame.event.get():
@@ -77,5 +77,5 @@ def main(win):
                         sel = 1
                 
                 if 300 < x < 410 and 350 < y < 380:
-                    return username_box.text, password_box.text, bool(sel)  # Return both username and password
+                    return username_box.text, password_box.text, bool(sel)
         pygame.display.update()
