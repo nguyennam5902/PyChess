@@ -1,13 +1,3 @@
-"""
-This file is a part of My-PyChess application.
-This file loads all the images and texts that are used.
-
-Most of the scripts in this application import specific classes from this
-module. Each class is a collection of resources for a particular script.
-All font-related stuff is done in this file, the functions to put a number
-on the screen and display date and time are also defined here
-"""
-
 import os.path
 import pygame
 
@@ -245,41 +235,43 @@ class PREF:
 class ONLINE:
     ERR = (
         vsmall.render("Attempting to connect to server..", True, WHITE),
-        vsmall.render("Lỗi: Không tìm thấy máy chủ ", True, WHITE),
+        vsmall.render("Lỗi 1: Không tìm thấy máy chủ ", True, WHITE),
         vsmall.render("[ERR 2] Versions are incompatible..", True, WHITE),
         vsmall.render("[ERR 3] Server is full (max = 10)..", True, WHITE),
         vsmall.render("[ERR 4] The server is locked...", True, WHITE),
         vsmall.render("[ERR 5] Unknown error occured...", True, WHITE),
         vsmall.render("Bạn đã ngắt kết nối tới máy chủ..", True, WHITE),
         vsmall.render("Đăng nhập thất bại", True, WHITE),
+        vsmall.render("Thiếu tên người dùng", True, WHITE),
+        vsmall.render("Thiếu mật khẩu", True, WHITE),
     )
     GOBACK = vsmall.render("Go Back", True, WHITE)
 
     EMPTY = small.render("Không có ai", True, WHITE)
 
-    LOBBY = large.render("Online Lobby", True, WHITE)
-    LIST = medium.render("List of Players", True, WHITE)
+    LOBBY = large.render("Sảnh trực tuyến", True, WHITE)
+    LIST = medium.render("Danh sách người chơi", True, WHITE)
     PLAYER = small.render("Player", True, WHITE)
     DOT = small.render(".", True, WHITE)
 
     ACTIVE = small.render("ACTIVE", True, GREEN)
     BUSY = small.render("BUSY", True, RED)
-    REQ = small.render("Send Request", True, WHITE)
-    YOUARE = medium.render("You Are", True, WHITE)
+    REQ = small.render("Thách đấu", True, WHITE)
+    YOUARE = medium.render("Bạn là", True, WHITE)
 
     ERRCONN = vsmall.render("Unable to connect to that player..", True, WHITE)
 
     REFRESH = pygame.image.load(os.path.join("res", "img", "refresh.png"))
 
     REQUEST1 = (
-        vsmall.render("Please wait for the other player to", True, WHITE),
-        vsmall.render("accept your request. Game will begin", True, WHITE),
-        vsmall.render("shortly. You will play as white", True, WHITE),
+        vsmall.render("Vui lòng chờ đối phương chấp", True, WHITE),
+        vsmall.render("nhận lời mời. Ván đấu sẽ sớm bắt đầu", True, WHITE),
+        vsmall.render("Bạn sẽ chơi Trắng", True, WHITE),
     )
     REQUEST2 = (
         vsmall.render("Player", True, WHITE),
-        vsmall.render("wants to play with you.", True, WHITE),
-        vsmall.render("Accept to play. You will play as black", True, WHITE),
+        vsmall.render("muốn chơi với bạn.", True, WHITE),
+        vsmall.render("Nếu đồng ý chơi, bạn sẽ chơi Đen", True, WHITE),
     )
 
     DRAW1 = (

@@ -64,18 +64,18 @@ def request(win, sock, key=None):
         pygame.draw.rect(win, (0, 0, 0), (100, 210, 300, 100))
         pygame.draw.rect(win, (255, 255, 255), (100, 210, 300, 100), 4)
 
-        win.blit(ONLINE.REQUEST1[0], (120, 220))
+        win.blit(ONLINE.REQUEST1[0], (140, 220))
         win.blit(ONLINE.REQUEST1[1], (105, 245))
-        win.blit(ONLINE.REQUEST1[2], (135, 270))
+        win.blit(ONLINE.REQUEST1[2], (185, 270))
 
     else:
         pygame.draw.rect(win, (0, 0, 0), (100, 160, 300, 130))
         pygame.draw.rect(win, (255, 255, 255), (100, 160, 300, 130), 4)
 
-        win.blit(ONLINE.REQUEST2[0], (110, 175))
-        win.blit(ONLINE.REQUEST2[1], (200, 175))
-        win.blit(ONLINE.REQUEST2[2], (105, 200))
-        putNum(win, key, (160, 175))
+        win.blit(ONLINE.REQUEST2[0], (140, 175))
+        win.blit(ONLINE.REQUEST2[1], (230, 175))
+        win.blit(ONLINE.REQUEST2[2], (125, 200))
+        putNum(win, key, (190, 175))
 
         win.blit(ONLINE.OK, (145, 240))
         win.blit(ONLINE.NO, (305, 240))
@@ -233,13 +233,12 @@ def draw_win(win, sock, requester=True):
 def showLobby(win, key, playerlist):
     win.fill((0, 0, 0))
 
-    win.blit(ONLINE.LOBBY, (100, 14))
-    pygame.draw.rect(win, (255, 255, 255), (65, 10, 355, 68), 4)
+    win.blit(ONLINE.LOBBY, (70, 14))
+    pygame.draw.rect(win, (255, 255, 255), (65, 10, 360, 68), 4)
     win.blit(BACK, (460, 0))
     win.blit(ONLINE.LIST, (20, 75))
-    win.blit(ONLINE.REFRESH, (270, 85))
-    pygame.draw.line(win, (255, 255, 255), (20, 114), (190, 114), 3)
-    pygame.draw.line(win, (255, 255, 255), (210, 114), (265, 114), 3)
+    win.blit(ONLINE.REFRESH, (390, 85))
+    pygame.draw.line(win, (255, 255, 255), (20, 114), (390, 114), 3)
 
     if not playerlist:
         win.blit(ONLINE.EMPTY, (25, 130))
@@ -257,7 +256,7 @@ def showLobby(win, key, playerlist):
         elif stat == "b":
             win.blit(ONLINE.BUSY, (200, yCord))
         pygame.draw.rect(win, (255, 255, 255), (300, yCord + 2, 175, 26), 2)
-        win.blit(ONLINE.REQ, (300, yCord))
+        win.blit(ONLINE.REQ, (320, yCord))
 
     win.blit(ONLINE.YOUARE, (100, 430))
     pygame.draw.rect(win, (255, 255, 255), (250, 435, 158, 40), 3)

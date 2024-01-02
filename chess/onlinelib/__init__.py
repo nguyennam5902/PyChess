@@ -1,8 +1,3 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we define the main functions for online chess, and aggregate
-other functions for importing from online.py
-'''
 from chess.lib import *
 from chess.onlinelib.utils import (
     bgThread,
@@ -40,7 +35,7 @@ def lobby(win, sock, key, load):
                     write(sock, "quit")
                     return 1
 
-                if 270 < x < 300 and 85 < y < 115:
+                if 390 < x < 420 and 85 < y < 115:
                     playerList = getPlayers(sock)
 
                 if 300 < x < 475:

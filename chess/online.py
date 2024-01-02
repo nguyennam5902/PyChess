@@ -10,7 +10,12 @@ PORT = 26104
 
 
 def main(win: Surface, username, password, load, ipv6=False):
-
+    if username == "":
+        showLoading(win, 8)
+        return 1
+    if password == "":
+        showLoading(win, 9)
+        return 1
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     servaddr = ('127.0.0.1', PORT)
     try:

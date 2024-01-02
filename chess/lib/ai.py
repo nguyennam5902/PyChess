@@ -17,6 +17,8 @@ DEPTH = 2
 # This is a rudementary and simple evaluative function for a given state of
 # board. It gives each piece a value based on its position on the board,
 # returns a numeric representation of the board
+
+
 def evaluate(board):
     score = 0
     for x, y, piece in board[0]:
@@ -50,6 +52,8 @@ def evaluate(board):
     return score
 
 # This is the Mini-Max algorithm, implemented with alpha-beta pruning.
+
+
 def miniMax(side, board, flags, depth=DEPTH, alpha=-INF, beta=INF):
     if depth == 0:
         return evaluate(board)

@@ -1,23 +1,26 @@
-"""
-This file is a part of My-PyChess application.
-In this file, we define the core chess-related functions.
-For a better understanding of the variables used here, checkout docs.txt
-"""
 # A simple function to make a copy of the board
+
+
 def copy(board):
-    return [[list(j) for j in board[i]] for i in range(2)]       
-        
+    return [[list(j) for j in board[i]] for i in range(2)]
+
 # Return the type of piece given it's position. Return None if Empty.
+
+
 def getType(side, board, pos):
     for piece in board[side]:
         if piece[:2] == pos:
             return piece[2]
 
 # Determine wether the position given is occupied by a piece of the given side.
+
+
 def isOccupied(side, board, pos):
     return getType(side, board, pos) is not None
 
 # Determine wether the position(s) given is(are) empty or not
+
+
 def isEmpty(board, *poslist):
     for pos in poslist:
         for side in range(2):
@@ -26,6 +29,8 @@ def isEmpty(board, *poslist):
     return True
 
 # Determine wether the king of a given side is in check or not.
+
+
 def isChecked(side, board):
     for piece in board[side]:
         if piece[2] == "k":
@@ -35,24 +40,30 @@ def isChecked(side, board):
             return False
 
 # Determine all the possible LEGAL moves available for the side.
+
+
 def legalMoves(side, board, flags):
     for piece in board[side]:
         for pos in availableMoves(side, board, piece, flags):
             yield [piece[:2], pos]
-            
+
 # This function returns wether a game has ended or not
+
+
 def isEnd(side, board, flags):
     # Check if the king of the given side is present in the board
     king_present = any(piece[2] == "k" for piece in board[side])
-    
+
     # If the king is not present, the game has ended
     return not king_present
 
 # This function moves the piece from one coordinate to other while handling the
-# capture of enemy, pawn promotion and en-passent. 
+# capture of enemy, pawn promotion and en-passent.
 # One thing to note that this function directly modifies global value of the
 # board variable from within the function, so pass a copy of the board
 # variable if you do not want global modification of the variable.
+
+
 def move(side, board, fro, to, promote="p"):
     UP = 8 if side else 1
     DOWN = 1 if side else 8
@@ -70,7 +81,7 @@ def move(side, board, fro, to, promote="p"):
                     move(side, board, [1, DOWN], [4, DOWN])
                 elif to[0] - fro[0] == 2:
                     move(side, board, [8, DOWN], [6, DOWN])
-                    
+
             if piece[2] == "p":
                 if to[1] == UP:
                     board[side].remove(piece)
@@ -81,11 +92,15 @@ def move(side, board, fro, to, promote="p"):
     return board
 
 # This function returns wether a move puts ones own king at check
+
+
 def moveTest(side, board, fro, to):
     # return not isChecked(side, move(side, copy(board), fro, to))
     return True
 
 # This function returns wether a move is valid or not
+
+
 def isValidMove(side, board, flags, fro, to):
     if 0 < to[0] < 9 and 0 < to[1] < 9 and not isOccupied(side, board, to):
         piece = fro + [getType(side, board, fro)]
@@ -94,6 +109,8 @@ def isValidMove(side, board, flags, fro, to):
 
 # This is an important wrapper function. It makes the move, updates the
 # flags and flips the side, returning the updated data.
+
+
 def makeMove(side, board, fro, to, flags, promote="q"):
     newboard = move(side, copy(board), fro, to, promote)
     newflags = updateFlags(side, newboard, fro, to, flags)
@@ -104,6 +121,8 @@ def makeMove(side, board, fro, to, flags, promote="q"):
 
 # Does a routine check to update all the flags required for castling and
 # enpassent. This function needs to be called AFTER every move played.
+
+
 def updateFlags(side, board, fro, to, flags):
     castle = list(flags[0])
     if [5, 8, "k"] not in board[0] or [1, 8, "r"] not in board[0]:
@@ -125,18 +144,22 @@ def updateFlags(side, board, fro, to, flags):
     return castle, enP
 
 # Given a side, board and piece, it yields all possible legal moves
-# of that piece. This function is an extension/wrapper on rawMoves() 
+# of that piece. This function is an extension/wrapper on rawMoves()
+
+
 def availableMoves(side, board, piece, flags):
     for i in rawMoves(side, board, piece, flags):
         if 0 < i[0] < 9 and 0 < i[1] < 9 and not isOccupied(side, board, i):
             if moveTest(side, board, piece[:2], i):
                 yield i
-    
+
 # Given a side, board and piece, it yields all possible moves by the piece.
 # If flags are given, it can also yeild the special moves of chess.
 # It also returns moves that are illegal, therefore the function is for
 # internal use only
-def rawMoves(side, board, piece, flags=[None, None]):  
+
+
+def rawMoves(side, board, piece, flags=[None, None]):
     x, y, ptype = piece
     if ptype == "p":
         if not side:
@@ -144,7 +167,7 @@ def rawMoves(side, board, piece, flags=[None, None]):
                 yield [x, 5]
             if isEmpty(board, [x, y - 1]):
                 yield [x, y - 1]
-                
+
             for i in ([x + 1, y - 1], [x - 1, y - 1]):
                 if isOccupied(1, board, i) or flags[1] == i:
                     yield i

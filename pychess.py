@@ -1,3 +1,4 @@
+import os
 import sys
 import pygame
 
@@ -57,7 +58,7 @@ cnt = 0
 img = 0
 run = True
 
-prefs = menus.pref.load() # type: ignore
+prefs = menus.pref.load()  # type: ignore
 
 music = sound.Music()
 music.play(prefs)
@@ -79,6 +80,7 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+            os._exit(0)
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
@@ -89,10 +91,12 @@ while run:
                 if ret == 0:
                     run = False
                 elif ret != 1:
-                    if ret[0]: # type: ignore
-                        run = chess.mysingleplayer(win, ret[1], prefs) # type: ignore
+                    if ret[0]:  # type: ignore
+                        run = chess.mysingleplayer(
+                            win, ret[1], prefs)  # type: ignore
                     else:
-                        run = chess.singleplayer(win, ret[1], ret[2], prefs) # type: ignore
+                        run = chess.singleplayer(
+                            win, ret[1], ret[2], prefs)  # type: ignore
 
             elif mult[0] < x < sum(mult[::2]) and mult[1] < y < sum(mult[1::2]):
                 sound.play_click(prefs)
@@ -108,7 +112,8 @@ while run:
                 if ret == 0:
                     run = False
                 elif ret != 1:
-                    run = chess.online(win, ret[0], ret[1], prefs, ret[1]) # type: ignore
+                    run = chess.online(
+                        win, ret[0], ret[1], prefs, ret[1])  # type: ignore
 
     pygame.display.flip()
 

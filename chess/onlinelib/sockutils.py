@@ -1,8 +1,3 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we define a few utility funtions and wrappers for socket related
-stuff.
-'''
 import queue
 import socket
 
@@ -66,7 +61,7 @@ def write(sock, msg):
 # of players connected to server if all went well, None otherwise.
 def getPlayers(sock):
     if not flush():
-        return None
+        return ()
     
     write(sock, "pStat")
     
@@ -76,7 +71,8 @@ def getPlayers(sock):
         for i in range(int(msg[-1])):
             newmsg = read()
             if newmsg == "close":
-                return None
+                return ()
             else:
                 data.append(newmsg)
         return tuple(data)
+    return ()
