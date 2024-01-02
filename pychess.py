@@ -19,8 +19,8 @@ pygame.display.set_caption("My-PyChess")
 pygame.display.set_icon(MAIN.ICON)
 
 sngl = (260, 140, 220, 40)
-mult = (260, 200, 200, 40)
-onln = (260, 260, 120, 40)
+mult = (260, 200, 210, 40)
+onln = (260, 260, 190, 40)
 
 
 def showMain(prefs):

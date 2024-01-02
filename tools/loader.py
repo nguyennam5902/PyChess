@@ -245,17 +245,17 @@ class PREF:
 class ONLINE:
     ERR = (
         vsmall.render("Attempting to connect to server..", True, WHITE),
-        vsmall.render("[ERR 1] Couldn't find the server..", True, WHITE),
+        vsmall.render("Lỗi: Không tìm thấy máy chủ ", True, WHITE),
         vsmall.render("[ERR 2] Versions are incompatible..", True, WHITE),
         vsmall.render("[ERR 3] Server is full (max = 10)..", True, WHITE),
         vsmall.render("[ERR 4] The server is locked...", True, WHITE),
         vsmall.render("[ERR 5] Unknown error occured...", True, WHITE),
-        vsmall.render("You got disconnected from server..", True, WHITE),
-        vsmall.render("Login failed", True, WHITE),
+        vsmall.render("Bạn đã ngắt kết nối tới máy chủ..", True, WHITE),
+        vsmall.render("Đăng nhập thất bại", True, WHITE),
     )
     GOBACK = vsmall.render("Go Back", True, WHITE)
 
-    EMPTY = small.render("No one's online, you are alone.", True, WHITE)
+    EMPTY = small.render("Không có ai", True, WHITE)
 
     LOBBY = large.render("Online Lobby", True, WHITE)
     LIST = medium.render("List of Players", True, WHITE)
@@ -317,11 +317,11 @@ class ONLINE:
 
 
 class LOGINBOARD:
-    HEAD = large.render("Login", True, WHITE)
+    HEAD = large.render("Đăng nhập", True, WHITE)
     with open(os.path.join("res", "texts", "login.txt")) as f:
         TEXT = [vsmall.render(i, True, WHITE) for i in f.read().splitlines()]
 
-    CONNECT = small.render("Connect", True, WHITE)
+    CONNECT = vsmall.render("Đăng nhập", True, WHITE)
 
 
 class ONLINEMENU:

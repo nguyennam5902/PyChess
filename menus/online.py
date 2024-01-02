@@ -24,14 +24,14 @@ def loginScreen(win, sel):
     
     rounded_rect(win, (255, 255, 255), (120, 10, 260, 70), 20, 4)
     rounded_rect(win, (255, 255, 255), (20, 90, 460, 400), 14, 4)
-    win.blit(LOGINBOARD.HEAD, (175, 15))
+    win.blit(LOGINBOARD.HEAD, (133, 15))
     win.blit(BACK, (460, 0))
     
     for cnt, i in enumerate(LOGINBOARD.TEXT):
         win.blit(i, (40, 100 + cnt*18))
     
     rounded_rect(win, (255, 255, 255), (300, 350, 110, 30), 10, 3)
-    win.blit(LOGINBOARD.CONNECT, (300, 350))
+    win.blit(LOGINBOARD.CONNECT, (313, 355))
 
 def main(win):
     clock = pygame.time.Clock()

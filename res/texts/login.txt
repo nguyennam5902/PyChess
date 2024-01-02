@@ -1,2 +1,2 @@
-First, please enter username & password
+Nhập tên người dùng và mật khẩu
 
