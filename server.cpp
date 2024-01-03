@@ -33,7 +33,7 @@ struct PlayerInfo
     int id;
     int score;
 };
-
+std::set<std::string> onlinePlayers;
 std::vector<PlayerSockInfo> playerInfos;
 std::queue<std::string> logQ;
 std::set<int> busyPpl;
@@ -671,6 +671,15 @@ void initPlayerThread(int sock)
     {
         write(sock, "notOK");
         return;
+    }
+    if (onlinePlayers.find(username) != onlinePlayers.end())
+    {
+        write(sock, "notOK");
+        return;
+    }
+    else
+    {
+        onlinePlayers.insert(username);
     }
 
     write(sock, "OK");
