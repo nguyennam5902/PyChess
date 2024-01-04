@@ -4,7 +4,7 @@ In this file, we manage the chess gameplay for multiplayer section of this
 application.
 '''
 import time
-from chess.lib import *
+from lib_chess.lib import *
 
 # run main code for chess
 def main(win, mode, timer, load, movestr=""):

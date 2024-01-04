@@ -3,7 +3,7 @@ import threading
 
 from pygame import Surface
 
-from chess.onlinelib import *
+from lib_chess.onlinelib import *
 
 VERSION = "v3.2.0"
 PORT = 26104

@@ -1,6 +1,6 @@
 import pygame
 
-from chess.onlinelib.sockutils import *
+from lib_chess.onlinelib.sockutils import *
 from tools.loader import ONLINE, BACK, putLargeNum, putNum
 
 # Shows a small popup when user requests game with wrong player.

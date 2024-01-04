@@ -1,8 +1,7 @@
 import os
 import sys
 import pygame
-
-import chess
+import lib_chess
 import menus
 from tools.loader import MAIN
 from tools import sound
@@ -92,10 +91,10 @@ while run:
                     run = False
                 elif ret != 1:
                     if ret[0]:  # type: ignore
-                        run = chess.mysingleplayer(
+                        run = lib_chess.mysingleplayer(
                             win, ret[1], prefs)  # type: ignore
                     else:
-                        run = chess.singleplayer(
+                        run = lib_chess.singleplayer(
                             win, ret[1], ret[2], prefs)  # type: ignore
 
             elif mult[0] < x < sum(mult[::2]) and mult[1] < y < sum(mult[1::2]):
@@ -104,7 +103,7 @@ while run:
                 if ret == 0:
                     run = False
                 elif ret != 1:
-                    run = chess.multiplayer(win, ret[0], ret[1], prefs)
+                    run = lib_chess.multiplayer(win, ret[0], ret[1], prefs)
 
             elif onln[0] < x < sum(onln[::2]) and onln[1] < y < sum(onln[1::2]):
                 sound.play_click(prefs)
@@ -112,7 +111,7 @@ while run:
                 if ret == 0:
                     run = False
                 elif ret != 1:
-                    run = chess.online(
+                    run = lib_chess.online(
                         win, ret[0], ret[1], prefs, ret[1])  # type: ignore
 
     pygame.display.flip()

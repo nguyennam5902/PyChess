@@ -1,5 +1,5 @@
-from chess.lib import *
-from chess.onlinelib.utils import (
+from lib_chess.lib import *
+from lib_chess.onlinelib.utils import (
     bgThread,
     read,
     readable,

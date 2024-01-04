@@ -1,4 +1,4 @@
-from chess.lib import *
+from lib_chess.lib import *
 from ext.pyFish import StockFish
 
 
