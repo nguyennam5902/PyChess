@@ -95,17 +95,17 @@ class CHESS:
     CHECKMATE = small.render("CHECKMATE!", True, BLACK)
     LOST = small.render("LOST", True, BLACK)
     CHOOSE = small.render("CHOOSE:", True, BLACK)
-    SAVE = small.render("Save Game", True, BLACK)
+    SAVE = small.render("Lưu", True, BLACK)
     UNDO = small.render("Undo", True, BLACK)
 
     MESSAGE = (
-        small.render("Do you want to quit", True, WHITE),
-        small.render("this game?", True, WHITE),
+        small.render("Bạn có chắc muốn", True, WHITE),
+        small.render("thoát ván này?", True, WHITE),
     )
 
     MESSAGE2 = (
-        small.render("Game saved. Now do", True, WHITE),
-        small.render("you want to quit?", True, WHITE),
+        small.render("Luu xong. Bạn có", True, WHITE),
+        small.render("thoát luôn không?", True, WHITE),
     )
 
     YES = small.render("YES", True, WHITE)
@@ -118,8 +118,8 @@ class CHESS:
         small.render("Your turn", True, BLACK),
     )
 
-    DRAW = small.render("Draw", True, BLACK)
-    RESIGN = small.render("Resign", True, BLACK)
+    DRAW = small.render("Hòa", True, BLACK)
+    RESIGN = small.render("Xin thua", True, BLACK)
 
     TIMEUP = (
         vsmall.render("Time Up!", True, WHITE),
