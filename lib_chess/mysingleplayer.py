@@ -38,7 +38,7 @@ def main(win, player, load, movestr=""):
                         # START HERE
                         piece = str(getType(side, board, prevsel)
                                     ).replace('p', '').upper()
-                        if isOccupied(not side, board, [x, y]):
+                        if isOccupied(not side, board, sel):
                             print("TAKE BY HUMAN")
                             human = 'x' + \
                                 chr(ord('a') + sel[0] - 1)+str(9 - sel[1])
