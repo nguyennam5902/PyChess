@@ -1,18 +1,16 @@
-'''
-This file is a part of My-PyChess application.
-In this file, we manage the chess gameplay for multiplayer section of this
-application.
-'''
 import time
 from lib_chess.lib import *
 
 # run main code for chess
+
+
 def main(win, mode, timer, load, movestr=""):
     start(win, load)
-    
+
     moves = movestr.split()
 
     side, board, flags = convertMoves(moves)
+    chess_board = chess.Board()
     clock = pygame.time.Clock()
     sel = prevsel = [0, 0]
 
@@ -21,7 +19,7 @@ def main(win, mode, timer, load, movestr=""):
     while True:
         looptime = getTime()
         clock.tick(25)
-        
+
         timedelta = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -52,13 +50,14 @@ def main(win, mode, timer, load, movestr=""):
                     if isValidMove(side, board, flags, prevsel, sel):
                         starttime = getTime()
                         promote = getPromote(win, side, board, prevsel, sel)
+                        makeOkMove(board, chess_board, prevsel, side, sel)
                         animate(win, side, board, prevsel, sel, load)
-                        
+
                         timedelta += getTime() - starttime
                         timer = updateTimer(side, mode, timer)
 
                         side, board, flags = makeMove(
-                            side, board, prevsel, sel, flags, promote)
+                            side, board, prevsel, sel, flags, promote)  # type: ignore
                         moves.append(encode(prevsel, sel, promote))
 
                 else:
@@ -68,10 +67,10 @@ def main(win, mode, timer, load, movestr=""):
                         if prompt(win, saveGame(moves, mode=mode, timer=timer)):
                             return 1
                         timedelta += getTime() - starttime
-                        
+
                     elif 0 < x < 80 and 0 < y < 50 and load["allow_undo"]:
                         moves = undo(moves)
                         side, board, flags = convertMoves(moves)
 
-        showScreen(win, side, board, flags, sel, load)
+        showScreen(win, side, board, flags, sel, load, chess_board=chess_board)
         timer = showClock(win, side, mode, timer, looptime, timedelta)
