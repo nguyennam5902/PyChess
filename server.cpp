@@ -715,6 +715,7 @@ void initPlayerThread(int sock)
         player(sock, key);
         write(sock, "close");
         log("Player " + std::to_string(key) + " has Quit");
+        onlinePlayers.erase(username);
         players.erase(std::remove_if(players.begin(), players.end(), [sock, key](const std::pair<int, int> &player)
                                      { return player.first == sock && player.second == key; }),
                       players.end());

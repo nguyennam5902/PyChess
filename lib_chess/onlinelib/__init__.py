@@ -53,7 +53,7 @@ def lobby(win, sock, key, load):
                                     return ret
 
                                 elif ret == 4:
-                                    newret = chess(win, sock, 0, load)
+                                    newret = chess_func(win, sock, 0, load)
                                     if newret in [0, 1, 2]:
                                         return newret
 
@@ -73,7 +73,7 @@ def lobby(win, sock, key, load):
                 ret = request(win, sock, msg[2:])
                 if ret == 4:
                     write(sock, "gmOk" + msg[2:])
-                    newret = chess(win, sock, 1, load)
+                    newret = chess_func(win, sock, 1, load)
                     if newret in [0, 1, 2]:
                         return newret
 
@@ -86,11 +86,11 @@ def lobby(win, sock, key, load):
 # This is called when user enters chess match, handles online chess.
 
 
-def chess(win, sock, player, load):
+def chess_func(win, sock, player, load):
     start(win, load)
-
+    print("ONLINE")
     side, board, flags = initBoardVars()
-
+    chess_board = chess.Board()
     clock = pygame.time.Clock()
     sel = prevsel = [0, 0]
     while True:
@@ -121,15 +121,15 @@ def chess(win, sock, player, load):
                             and isValidMove(side, board, flags, prevsel, sel)):
                         promote = getPromote(win, player, board, prevsel, sel)
                         write(sock, "mov" + encode(prevsel, sel, promote))
-
+                        makeOkMove(board, chess_board, prevsel, side, sel)
                         animate(win, player, board, prevsel, sel, load, player)
                         side, board, flags = makeMove(
-                            side, board, prevsel, sel, flags, promote)
-                    if isEnd(side, board, flags):
+                            side, board, prevsel, sel, flags, promote) # type: ignore
+                    if chess_board.is_checkmate():
                         write(sock, "win")
                         ret = draw_win(win, sock)
                         return ret
-                elif not isEnd(side, board, flags):
+                elif not chess_board.is_checkmate():
                     if 0 < x < 70 and 0 < y < 50:
                         write(sock, "draw?")
                         ret = draw(win, sock)
@@ -140,7 +140,8 @@ def chess(win, sock, player, load):
                         write(sock, "resign")
                         return 3
 
-        showScreen(win, side, board, flags, sel, load, player, True)
+        showScreen(win, side, board, flags, sel, load,
+                   player, True, chess_board=chess_board)
         if readable():
             msg = read()
             if msg == "close":
@@ -163,10 +164,11 @@ def chess(win, sock, player, load):
             elif msg.startswith("mov") and side != player:
                 fro, to, promote = decode(msg[3:])
                 if isValidMove(side, board, flags, fro, to):
+                    makeOkMove(board, chess_board, fro, side, to)
                     animate(win, side, board, fro, to, load, player)
 
                     side, board, flags = makeMove(
-                        side, board, fro, to, flags, promote)
+                        side, board, fro, to, flags, promote) # type: ignore
                     sel = [0, 0]
                 else:
                     return 2

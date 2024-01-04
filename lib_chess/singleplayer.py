@@ -3,7 +3,7 @@ from ext.pyFish import StockFish
 
 
 def main(win, player, level, load, movestr=""):
-    fish = StockFish(getSFpath(), level)
+    fish = StockFish(getSFpath(), level) # type: ignore
 
     if not fish.isActive():
         rmSFpath()
@@ -17,7 +17,7 @@ def main(win, player, level, load, movestr=""):
 
     if player == 1 and not moves:
         fish.startEngine()
-
+    chess_board = chess.Board()
     clock = pygame.time.Clock()
     sel = prevsel = [0, 0]
     while True:
@@ -48,10 +48,11 @@ def main(win, player, level, load, movestr=""):
                     if (side == player
                             and isValidMove(side, board, flags, prevsel, sel)):
                         promote = getPromote(win, side, board, prevsel, sel)
+                        makeOkMove(board, chess_board, prevsel, side, sel)
                         animate(win, side, board, prevsel, sel, load, player)
 
                         side, board, flags = makeMove(
-                            side, board, prevsel, sel, flags, promote)
+                            side, board, prevsel, sel, flags, promote) # type: ignore
                         fish.makeMove(encode(prevsel, sel, promote))
 
                 elif side == player or end:
@@ -70,10 +71,11 @@ def main(win, player, level, load, movestr=""):
 
         end = isEnd(side, board, flags)
 
-        showScreen(win, side, board, flags, sel, load, player)
+        showScreen(win, side, board, flags, sel, load, player,chess_board=chess_board)
         if side != player and not end and fish.hasMoved():
             fro, to, promote = decode(fish.getMove())
+            makeOkMove(board, chess_board, fro, side, to)
             animate(win, side, board, fro, to, load, player)
 
-            side, board, flags = makeMove(side, board, fro, to, flags, promote)
+            side, board, flags = makeMove(side, board, fro, to, flags, promote) # type: ignore
             sel = [0, 0]

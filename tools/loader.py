@@ -238,7 +238,7 @@ class ONLINE:
         vsmall.render("Lỗi 1: Không tìm thấy máy chủ ", True, WHITE),
         vsmall.render("[ERR 2] Versions are incompatible..", True, WHITE),
         vsmall.render("[ERR 3] Server is full (max = 10)..", True, WHITE),
-        vsmall.render("[ERR 4] The server is locked...", True, WHITE),
+        vsmall.render("Lỗi 4: Máy chủ đang khóa", True, WHITE),
         vsmall.render("[ERR 5] Unknown error occured...", True, WHITE),
         vsmall.render("Bạn đã ngắt kết nối tới máy chủ..", True, WHITE),
         vsmall.render("Đăng nhập thất bại", True, WHITE),
@@ -275,32 +275,32 @@ class ONLINE:
     )
 
     DRAW1 = (
-        vsmall.render("Sent a request to your opponent for_1", True, WHITE),
-        vsmall.render("draw, wait for reply.", True, WHITE),
+        vsmall.render("Gửi yêu cầu for_1", True, WHITE),
+        vsmall.render("Xin chờ.", True, WHITE),
     )
 
     DRAW2 = (
-        vsmall.render("Your opponent is requesting for a", True, WHITE),
-        vsmall.render("draw, please reply.", True, WHITE),
+        vsmall.render("Đối thủ cầu hòa", True, WHITE),
+        vsmall.render("Có chấp nhận hòa.", True, WHITE),
     )
     WIN1 = (
-        vsmall.render("You Lose", True, WHITE),
-        vsmall.render("draw, wait for reply.", True, WHITE),
+        vsmall.render("Bạn thua", True, WHITE),
+        vsmall.render("Trở lại sảnh", True, WHITE),
     )
 
     WIN2 = (
-        vsmall.render("Your Win", True, WHITE),
-        vsmall.render("draw, please reply.", True, WHITE),
+        vsmall.render("Bạn thắng", True, WHITE),
+        vsmall.render("Trỏ lại sảnh.", True, WHITE),
     )
 
     POPUP = {
-        "quit": vsmall.render("Opponent got disconnected", True, WHITE),
-        "resign": vsmall.render("The opponent has resigned", True, WHITE),
-        "draw": vsmall.render("A draw has been agreed", True, WHITE),
-        "end": vsmall.render("Game ended, opponent left", True, WHITE),
-        "abandon": vsmall.render("Opponent abandoned match", True, WHITE),
-        "win": vsmall.render("You win", True, WHITE),
-        "lose": vsmall.render("You lose", True, WHITE),
+        "quit": vsmall.render("Đối thủ bị mất kết nối", True, WHITE),
+        "resign": vsmall.render("Đối thủ đã đàu hàng", True, WHITE),
+        "draw": vsmall.render("Chấp nhận hòa", True, WHITE),
+        "end": vsmall.render("Ván đấu kết thúc", True, WHITE),
+        "abandon": vsmall.render("Đối thủ đã rời trận", True, WHITE),
+        "win": vsmall.render("Bạn thắng", True, WHITE),
+        "lose": vsmall.render("Bạn thua", True, WHITE),
 
     }
 
