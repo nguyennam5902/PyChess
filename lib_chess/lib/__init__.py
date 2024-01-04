@@ -1,6 +1,7 @@
 from tabnanny import check
 
 from chess import Board
+import chess
 from lib_chess.lib.core import (
     getType,
     isOccupied,
@@ -96,6 +97,47 @@ def showAvailMoves(win, side, board, pos, flags, flip):
         y = 470 - i[1] * 50 if flip else i[1] * 50 + 20
         pygame.draw.rect(win, (0, 255, 0), (x, y, 10, 10))
 
+
+def makeOkMove(board, chess_board: Board, prevsel, side, sel):
+    piece = str(getType(side, board, prevsel)
+                ).replace('p', '').upper()
+    if isOccupied(not side, board, sel):
+        # print("TAKE BY HUMAN")
+        human = 'x' + \
+            chr(ord('a') + sel[0] - 1)+str(9 - sel[1])
+        if len(piece) == 0:
+            human = chr(ord('a') + prevsel[0] - 1)+human
+        else:
+            human = piece + human
+        try:
+            chess_board.parse_san(human)
+        except chess.AmbiguousMoveError:
+            print("AmbiguousMoveError")
+    else:
+        if piece == "K" and abs(sel[0] - prevsel[0]) != 1:
+            human = "0-0" if sel[0] > prevsel[0] else "0-0-0"
+        else:
+            human = piece + \
+                chr(ord('a') + sel[0] - 1)+str(9 - sel[1])
+        try:
+            chess_board.parse_san(human)
+        except chess.AmbiguousMoveError:
+            # print("AmbiguousMoveError")
+            human = piece + \
+                chr(ord(
+                    'a') + prevsel[0] - 1) + chr(ord('a') + sel[0] - 1)+str(9 - sel[1])
+            # print("NEW MOVE:", human)
+            try:
+                chess_board.parse_san(human)
+            except chess.AmbiguousMoveError:
+                human = piece + \
+                    str(9 - prevsel[1]) + chr(ord('a') +
+                                              sel[0] - 1)+str(9 - sel[1])
+            # print("NEW BETTER MOVE:", human)
+
+    # print(human)
+    chess_board.push_san(human)
+    print(chess_board.is_checkmate())
 # This function makes a gentle animation of a piece that is getting moved.
 # This function needs to be called BEFORE the actual move takes place
 
@@ -135,8 +177,7 @@ def animate(win, side, board, fro, to, load, player=None):
 # everytime in the game loop.
 
 
-
-def showScreen(win, side, board, flags, pos, load, player=None, online=False,chess_board:Board=None): # type: ignore
+def showScreen(win, side, board, flags, pos, load, player=None, online=False, chess_board: Board = None):  # type: ignore
     multi = False
     if player is None:
         multi = True
